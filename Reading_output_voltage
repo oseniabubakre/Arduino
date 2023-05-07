@@ -1,0 +1,48 @@
+int redPin = 10;
+int yellowPin = 12;
+int greenPin = 6;
+int readPin = A2;
+int voltage_to_be_read;
+int brightnessControl = 255;
+int delay_time = 500;
+float output;
+void setup() {
+  // put your setup code here, to run once:
+pinMode(readPin, INPUT);
+pinMode(redPin,OUTPUT);
+pinMode(yellowPin,OUTPUT);
+pinMode(greenPin,OUTPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+voltage_to_be_read = analogRead(readPin);
+output = voltage_to_be_read * 5.0/1023;
+Serial.println(output);
+if(output == 0)
+{
+  digitalWrite(redPin, LOW);
+   digitalWrite(yellowPin, LOW);
+   digitalWrite(greenPin, LOW);
+}
+else if( output > 0 && output <= 3)
+{
+  digitalWrite(greenPin, HIGH);
+  delay(delay_time);
+  digitalWrite(greenPin, LOW);
+  delay(delay_time);
+}
+else if (output > 3 && output <=4)
+{
+   digitalWrite(yellowPin, HIGH);
+   delay(delay_time);
+   digitalWrite(yellowPin, LOW);
+   delaydelay_time);
+}
+else 
+{
+   digitalWrite(redPin, HIGH);
+}
+}
